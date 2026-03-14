@@ -22,7 +22,10 @@ alert("Masukkan email dulu")
 return
 }
 
-fetch("https://script.google.com/macros/s/AKfycbyMw-mdBfTH8-QT32fnCUpTZVX2-3LjFkQm-KaiaIuwj44ePryXyq4znPvgTdqZ49H_/exec?email="+encodeURIComponent(email))
+fetch("https://script.google.com/macros/s/AKfycbyMw-mdBfTH8-QT32fnCUpTZVX2-3LjFkQm-KaiaIuwj44ePryXyq4znPvgTdqZ49H_/exec?email="
++encodeURIComponent(email)
++"&device="
++encodeURIComponent(navigator.userAgent))
 
 .then(res => res.text())
 
