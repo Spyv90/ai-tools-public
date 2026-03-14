@@ -22,18 +22,25 @@ alert("Masukkan email dulu")
 return
 }
 
-fetch("https://script.google.com/macros/s/AKfycbzZQYCYoIC8A0ZGPX0pRUl3BS2noMNB9kKwwATFc51LQxWb8N6dxsLvwqZau7b_eNG4/exec?email="
-+encodeURIComponent(email)
-+"&device="
-+encodeURIComponent(navigator.userAgent))
+var url = "https://script.google.com/macros/s/AKfycbzZQYCYoIC8A0ZGPX0pRUl3BS2noMNB9kKwwATFc51LQxWb8N6dxsLvwqZau7b_eNG4/exec?email="
++ encodeURIComponent(email)
++ "&device="
++ encodeURIComponent(navigator.userAgent)
 
+fetch(url)
 .then(res => res.text())
-
 .then(data => {
 
 if(data.trim()=="OK"){
 
+// kirim log login ke sheet
+var img = new Image()
+img.src = url
+
+// redirect ke tools
+setTimeout(function(){
 window.location.href="https://gemini.google.com/share/790d018c6dff"
+},500)
 
 }else{
 
@@ -42,9 +49,10 @@ alert("Email tidak terdaftar")
 }
 
 })
-
 .catch(err => {
+
 alert("Server error")
+
 })
 
 }
