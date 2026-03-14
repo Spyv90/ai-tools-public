@@ -22,16 +22,10 @@ alert("Masukkan email dulu")
 return
 }
 
-fetch("https://script.google.com/macros/s/AKfycbzZQYCYoIC8A0ZGPX0pRUl3BS2noMNB9kKwwATFc51LQxWb8N6dxsLvwqZau7b_eNG4/exec",{
-  method:"POST",
-  headers:{
-    "Content-Type":"application/json"
-  },
-  body:JSON.stringify({
-    email: email,
-    device: navigator.userAgent
-  })
-})
+fetch("https://script.google.com/macros/s/AKfycbzZQYCYoIC8A0ZGPX0pRUl3BS2noMNB9kKwwATFc51LQxWb8N6dxsLvwqZau7b_eNG4/exec?email="
++encodeURIComponent(email)
++"&device="
++encodeURIComponent(navigator.userAgent))
 
 .then(res => res.text())
 
