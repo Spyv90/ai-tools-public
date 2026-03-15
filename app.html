@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<script>
+
+const params=new URLSearchParams(window.location.search)
+
+const token=params.get("token")
+
+fetch("https://script.google.com/macros/s/AKfycbzZQYCYoIC8A0ZGPX0pRUl3BS2noMNB9kKwwATFc51LQxWb8N6dxsLvwqZau7b_eNG4/exec?action=verify&token="+token)
+
+.then(res=>res.text())
+
+.then(data=>{
+
+if(data=="OK"){
+
+window.location.href="https://gemini.google.com/share/790d018c6dff"
+
+}else{
+
+document.body.innerHTML="Akses ditolak"
+
+}
+
+})
+
+</script>
+
+</body>
+</html>
