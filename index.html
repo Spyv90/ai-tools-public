@@ -5,53 +5,43 @@
 
 <h2>Login Member</h2>
 
-<input id="email" placeholder="Masukkan email member">
+<input id="email" placeholder="Masukkan email">
 
 <br><br>
 
-<button onclick="start()">Masuk Tools</button>
+<button onclick="login()">Masuk Tools</button>
 
 <script>
 
-function start(){
+function login(){
 
-var email = document.getElementById("email").value
+var email=document.getElementById("email").value
 
 if(email==""){
-alert("Masukkan email dulu")
+alert("Masukkan email")
 return
 }
 
-var url = "https://script.google.com/macros/s/AKfycbzZQYCYoIC8A0ZGPX0pRUl3BS2noMNB9kKwwATFc51LQxWb8N6dxsLvwqZau7b_eNG4/exec?email="
-+ encodeURIComponent(email)
-+ "&device="
-+ encodeURIComponent(navigator.userAgent)
+var device=navigator.userAgent
 
-fetch(url)
-.then(res => res.text())
-.then(data => {
+fetch("https://script.google.com/macros/s/AKfycbzZQYCYoIC8A0ZGPX0pRUl3BS2noMNB9kKwwATFc51LQxWb8N6dxsLvwqZau7b_eNG4/exec?action=login&email="
++encodeURIComponent(email)
++"&device="
++encodeURIComponent(device))
 
-if(data.trim()=="OK"){
+.then(res=>res.text())
 
-// kirim log login ke sheet
-var img = new Image()
-img.src = url
+.then(token=>{
 
-// redirect ke tools
-setTimeout(function(){
-window.location.href="https://gemini.google.com/share/790d018c6dff"
-},500)
-
-}else{
+if(token=="NO"){
 
 alert("Email tidak terdaftar")
 
+}else{
+
+window.location.href="app.html?token="+token
+
 }
-
-})
-.catch(err => {
-
-alert("Server error")
 
 })
 
